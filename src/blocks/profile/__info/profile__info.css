@@ -1,0 +1,14 @@
+.profile__info {
+  display: flex;
+  flex: 1 1 auto;
+  padding: 0 30px;
+  max-width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .profile__info {
+    padding: 26px 0 0 28px;
+  }
+}
