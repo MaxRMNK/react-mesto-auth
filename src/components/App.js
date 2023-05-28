@@ -62,7 +62,7 @@ function App() {
     if (token) {
       auth.checkToken(token)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setLoggedIn(true);
         setUserData(res.data);
       })
@@ -109,12 +109,10 @@ function App() {
 
   // Выход
   function handleSignOut() {
-    // console.log('signOut', localStorage.getItem('jwt'));
     localStorage.removeItem('jwt');
     setLoggedIn(false);
     setUserData({});
     navigate('/sign-up', { replace: true });
-    // console.log('signOut2', localStorage.getItem('jwt'));
   }
 
 
@@ -136,7 +134,12 @@ function App() {
         console.log(err); // выведем ошибку в консоль
       });
 
-      // navigate('/', { replace: true });
+      // Это нужно для того, чтобы при отправке данных формы "вход" переадресация осуществлялась корректно.
+      // При вызове функции handleLogin, функция checkAuth вызывается и значение setLoggedIn(true)
+      // устанавливаются с задержкой -> таким образом переадресация на главную страницу после "входа"
+      // происходит только после повторной отправки формы.
+      // Если не ошибаюсь тут что-то связано с асинхронностью функции. Как решить проблему по-другому не знаю
+      navigate('/', { replace: true });
     }
   }, [isLoggedIn]);
   // Второй аргумент - [] - массив зависимостей. Если значения прописанные в этом массиве изменились,
@@ -231,7 +234,6 @@ function App() {
   // Удаление карточки: popup подтверждение удаления.
   // Код из задания ПР11 перенес в handleCardDeleteConfirm
   function handleCardDelete(card) {
-    // console.log('111');
     setCardDelete(card);
     setIsConfirmDeletePopupOpen(true);
     // useState (setCardDelete()) - асинхронная функция. Поэтому здесь выводится обнуленное значение (null),
