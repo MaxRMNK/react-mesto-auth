@@ -12,6 +12,6 @@ export function useForm(inputValues) {
     const {value, name} = event.target;
     setValues({...values, [name]: value});
   };
-  console.log(values);
+  // console.log(values);
   return {values, handleChange, setValues};
 }

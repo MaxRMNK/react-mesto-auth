@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; // useNavigate
 
-// import './Register.css';
 
-const Register = ({formValue, setFormValue, onRegister}) => {
+const Register = ({onRegister}) => {
 
-  // const navigate = useNavigate();
+  const [formValue, setFormValue] = React.useState({ email: '', password: '' });
 
   const handleChange = (evt) => {
     const {name, value} = evt.target;
@@ -17,7 +16,7 @@ const Register = ({formValue, setFormValue, onRegister}) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    onRegister();
+    onRegister(formValue);
   }
 
 

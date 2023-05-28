@@ -2,7 +2,9 @@ import React from 'react';
 // import './Login.css';
 
 
-const Login = ({formValue, setFormValue, onLogin}) => { //setInfoTooltipOpen, setSuccessAuth
+const Login = ({onLogin}) => { //formValue, setFormValue, setInfoTooltipOpen, setSuccessAuth
+
+  const [formValue, setFormValue] = React.useState({ email: '', password: '' });
 
   const handleChange = (evt) => {
     const {name, value} = evt.target;
@@ -14,7 +16,7 @@ const Login = ({formValue, setFormValue, onLogin}) => { //setInfoTooltipOpen, se
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    onLogin();
+    onLogin(formValue);
   }
 
   return(

@@ -33,7 +33,7 @@ class Api {
 
   // получить данные пользователя (GET)
   getUser() {
-    return fetch(this._urlApi + '/users/me', {
+    return fetch(`${this._urlApi}/users/me`, {
       //method: 'GET',
       headers: {authorization: this._token},
     })
@@ -47,7 +47,7 @@ class Api {
 
   // заменить данные пользователя (PATCH)
   setUserInfo(name, about){ //changeUserInfo
-    return fetch(this._urlApi + '/users/me', {
+    return fetch(`${this._urlApi}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       // headers: {authorization: this._token},
@@ -63,7 +63,7 @@ class Api {
 
   // заменить аватар (PATCH)
   setAvatar(avatar){
-    return fetch(this._urlApi + '/users/me/avatar', {
+    return fetch(`${this._urlApi}/users/me/avatar`, { // this._urlApi + '/users/me/avatar'
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({ avatar: avatar })
@@ -73,7 +73,7 @@ class Api {
 
   // добавить карточку (POST)
   addCardInDb(data){
-    return fetch(this._urlApi + '/cards', {
+    return fetch(`${this._urlApi}/cards`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify(data)

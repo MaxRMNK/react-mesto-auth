@@ -1,43 +1,37 @@
 import React from "react";
-// import { useState, useEffect } from 'react';
 import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
-
-// import "./App.css";
 
 import Header from "./Header";
 import Main from "./Main";
-// import Card from './Card';
 import Login from "./Login";
 import Register from "./Register";
 import Footer from "./Footer";
-// import PopupWithForm from "./PopupWithForm";
+import InfoTooltip from "./InfoTooltip";
+
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import ConfirmDeletePopup from "./ConfirmDeletePopup";
 import ImagePopup from "./ImagePopup";
-import InfoTooltip from "./InfoTooltip";
 
-import { api } from "../utils/Api";
+import { api } from "../utils/api";
 import * as auth from "../utils/auth";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import ProtectedRouteElement from "./ProtectedRoute";
 
 import defaultAvatar from "../images/default-avatar.png";
 
+const defaultUserInfo = {
+  name: "Жак-Ив Кусто",
+  about: "Исследователь океана",
+  avatar: defaultAvatar,
+};
+
 function App() {
-  const defaultUserInfo = {
-    name: "Жак-Ив Кусто",
-    about: "Исследователь океана",
-    avatar: defaultAvatar,
-    // name: '',
-    // about: '',
-    // avatar: '',
-  };
+
   // Стейт данных пользователя.
-  // setcurrentUser следит за состоянием "объекта", и при его изменении перезаписывает currentUser (раньше - userInfo)
-  const [currentUser, setCurrentUser] = React.useState(defaultUserInfo);
-  // const [currentUser, setCurrentUser] = React.useState({ name: 'Жак-Ив Кусто', about: 'Исследователь океана', avatar: defaultAvatar });
+  const [currentUser, setCurrentUser] = React.useState(defaultUserInfo); // раньше: userInfo
+
   const [cards, setCards] = React.useState([]);
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false); // Стейт надписи на кнопке popup
@@ -49,29 +43,22 @@ function App() {
   const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] = React.useState(false);
   const [cardDelete, setCardDelete] = React.useState(null);
 
-
-
-  const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false); // Попап с сообщением открыт/закрыт
+  const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false); // Попап с сообщением, открыт/закрыт
   const [isSuccessAuth, setSuccessAuth] = React.useState(false);
 
   const [isLoggedIn, setLoggedIn] = React.useState(false);
   const [userData, setUserData] = React.useState({});
 
-  // React.useEffect(() => {
-  //   setInfoTooltipOpen(true);
-  // }, [isSuccessAuth]);
-
 
   // Регистрация и авторизация
-  const [valueRegister, setValueRegister] = React.useState({ email: '', password: '' });
-  const [valueLogin, setValueLogin] = React.useState({ email: '', password: '' });
+  // const [valueRegister, setValueRegister] = React.useState({ email: '', password: '' });
+  // const [valueLogin, setValueLogin] = React.useState({ email: '', password: '' });
 
   const navigate = useNavigate();
 
   // Проверка токена
   function checkAuth() {
     const token = localStorage.getItem('jwt');
-
     if (token) {
       auth.checkToken(token)
       .then((res) => {
@@ -81,28 +68,16 @@ function App() {
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
-        console.log('Ошибка проверки токена');
       })
-      .finally(() => {})
     }
   }
 
-
-  React.useEffect(() => {
-    console.log('isLoggedIn', isLoggedIn)
-    console.log('userData', userData);
-  });
-
-
   // Регистрация
-  function handleRegister() {
-    const { email, password } = valueRegister;
-    auth.register(email, password)
+  function handleRegister(value) {
+    auth.register(value.email, value.password)
     .then((res) => {
-      console.log(res.data);
       setSuccessAuth(true);
-      navigate('/sign-in', { replace: true });
-      // setValueRegister({ email: '', password: '' });
+      navigate('/sign-up', { replace: true });
     })
     .catch((err) => {
       setSuccessAuth(false);
@@ -114,26 +89,21 @@ function App() {
   }
 
   // Авторизация
-  function handleLogin() {
-    const { email, password } = valueLogin;
-    auth.login(email, password)
+  function handleLogin(value) {
+    auth.login(value.email, value.password)
     .then((data) => {
-      // console.log(data);
-      // localStorage.removeItem('jwt');
       if(data.token) {
         localStorage.setItem('jwt', data.token);
         checkAuth();
         navigate('/', { replace: true });
         // setSuccessAuth(true);
         // setLoggedIn(true);
-        // setValueLogin({ email: '', password: '' });
       }
     })
     .catch((err) => {
       setSuccessAuth(false);
       setInfoTooltipOpen(true);
       console.log(err); // выведем ошибку в консоль
-      console.log('Ошибка авторизации');
     })
   }
 
@@ -155,20 +125,19 @@ function App() {
 
   // Загрузка с сервера данных карточек и профиля пользователя
   React.useEffect(() => {
-    api
+    if(isLoggedIn){
+      api
       .getAllPageData()
       .then((result) => {
-        // console.log(result);
-        const [apiUser, apiCards] = result;
-        setCurrentUser(apiUser);
-        setCards(apiCards);
+        setCurrentUser(result[0]); // apiUser
+        setCards(result[1]); // apiCards
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
       });
 
-    // checkAuth();
-    navigate('/', { replace: true });
+      // navigate('/', { replace: true });
+    }
   }, [isLoggedIn]);
   // Второй аргумент - [] - массив зависимостей. Если значения прописанные в этом массиве изменились,
   // тогда этот эффект будет выполняться. Если нет - логика внутри useEffect вызываться не будет.
@@ -394,13 +363,13 @@ function App() {
         />}
         />
         <Route path="/sign-up" element={<Login
-          formValue={valueLogin}
-          setFormValue={setValueLogin}
+          // formValue={valueLogin}
+          // setFormValue={setValueLogin}
           onLogin={handleLogin}
           />} />
         <Route path="/sign-in" element={<Register
-          formValue={valueRegister}
-          setFormValue={setValueRegister}
+          // formValue={valueRegister}
+          // setFormValue={setValueRegister}
           onRegister={handleRegister}
           />} />
         <Route path="*" element={isLoggedIn ? <Navigate to="/" replace /> : <Navigate to="/sign-up" replace />} />
