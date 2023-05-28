@@ -1,5 +1,5 @@
 # Проект: Mesto-React
-[Ссылка на Gihub Pages](https://maxrmnk.github.io/mesto-react/)
+[Ссылка на Gihub Pages](https://maxrmnk.github.io/react-mesto-auth/)
 
 ## Описание проекта
 Проект выполнен в качестве проверочного задания в рамках учебной программы **[ЯндексПрактикум «Веб-разработчик»](https://practicum.yandex.ru/web/), курс 5 спринт 12**.
