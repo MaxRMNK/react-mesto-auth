@@ -1,16 +1,6 @@
-import './Header.css';
-
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 
 function Header({ onSignOut, isLoggedIn, userData }) {
-  const navigate = useNavigate();
-
-  // function signOut() {
-  //   console.log('signOut', localStorage.getItem('token'));
-  //   localStorage.removeItem('token');
-  //   // navigate('/sign-up');
-  //   console.log('signOut2', localStorage.getItem('token'));
-  // }
 
   return (
     <header className="header">

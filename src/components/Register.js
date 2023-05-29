@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // useNavigate
-
+import { Link } from 'react-router-dom';
 
 const Register = ({onRegister}) => {
 
+  // Здесь обработки инпутов используется стейт и метод в самом компоненте,
+  // А в Login.js переписал на использование хука useState
   const [formValue, setFormValue] = React.useState({ email: '', password: '' });
 
   const handleChange = (evt) => {

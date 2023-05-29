@@ -1,11 +1,8 @@
 // import './AddPlacePopup.css';
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
-// import { CurrentUserContext } from "../contexts/CurrentUserContext";
-// import { useForm } from "../hooks/useForm";
 
 function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading, onOverlay }) { //, buttonText
-  // const currentUser = React.useContext(CurrentUserContext);
 
   const [title, setTitle] = React.useState('');
   const [link, setLink] = React.useState('');

@@ -1,4 +1,3 @@
-// import './EditProfilePopup.css';
 import React from 'react';
 import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
@@ -7,7 +6,6 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 function EditProfilePopup({isOpen, onClose, onUpdateUser, isLoading, onOverlay}) {
 
   const currentUser = React.useContext(CurrentUserContext);
-  // console.log(currentUser);
 
   const [name, setName] = React.useState('');
   const [description, setDescription] = React.useState('');
@@ -17,14 +15,11 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser, isLoading, onOverlay})
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
-
-  // console.log(currentUser.name);
-  // const [value, setValue] = React.useState(currentUser);
+  }, [isOpen]);
+  // В массиве зависимостей был "currentUser", но при закрытии popup без сохранения данные формы не сбрасывались
 
   function handleNameChange(e) {
     setName(e.target.value);
-    // console.log(e.target.value);
   }
 
   function handleDescriptionChange(e) {
@@ -40,8 +35,6 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser, isLoading, onOverlay})
       about: description,
     });
   }
-
-
 
 
   return (

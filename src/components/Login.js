@@ -1,22 +1,15 @@
 import React from 'react';
-// import './Login.css';
-
+import { useForm } from '../hooks/useForm';
 
 const Login = ({onLogin}) => { //formValue, setFormValue, setInfoTooltipOpen, setSuccessAuth
 
-  const [formValue, setFormValue] = React.useState({ email: '', password: '' });
-
-  const handleChange = (evt) => {
-    const {name, value} = evt.target;
-    setFormValue({
-      ...formValue,
-      [name]: value
-    });
-  }
+  // Переписал. Здесь инпуты обрабатываются хуком useForm
+  // В Register.js - по-старому, методом и стейтом в самом компоненте.
+  const {values, handleChange, setValues} = useForm({ email: '', password: '' })
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    onLogin(formValue);
+    onLogin(values);
   }
 
   return(
@@ -31,7 +24,7 @@ const Login = ({onLogin}) => { //formValue, setFormValue, setInfoTooltipOpen, se
             minLength="2"
             maxLength="30"
             name="email"
-            value={formValue.email}
+            value={values.email}
             onChange={handleChange}
             required
           />
@@ -42,7 +35,7 @@ const Login = ({onLogin}) => { //formValue, setFormValue, setInfoTooltipOpen, se
             id="input-password"
             placeholder="Пароль"
             name="password"
-            value={formValue.password}
+            value={values.password}
             onChange={handleChange}
             required
           />

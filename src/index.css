@@ -64,125 +64,74 @@ code {
 @import url("./blocks/popup/__illustration/popup__illustration.css");
 @import url("./blocks/popup/__large-image/popup__large-image.css");
 @import url("./blocks/popup/__caption-image/popup__caption-image.css");
+@import url("./blocks/popup/__tooltip/popup__tooltip.css");
+@import url("./blocks/popup/__tooltip/_succeed/popup__tooltip_succeed.css");
+@import url("./blocks/popup/__tooltip/_fail/popup__tooltip_fail.css");
+
+/* react-mesto-auth */
+@import url("./blocks/auth/auth.css");
+@import url("./blocks/auth/__header/auth__header.css");
+@import url("./blocks/auth/__input/auth__input.css");
+@import url("./blocks/auth/__error/auth__error.css");
+@import url("./blocks/auth/__button/auth__button.css");
+@import url("./blocks/auth/__reminder/auth__reminder.css");
+@import url("./blocks/auth/__caption/auth__caption.css");
+@import url("./blocks/auth/__link/auth__link.css");
+@import url("./blocks/auth/auth.css");
 
 
-/****************************/
 
-.auth {
-  max-width: 360px;
-  padding: 40px 0 0;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  /* background-color: #333; */
-}
+@import url("./blocks/header/__nav-list/header__nav-list.css");
+@import url("./blocks/header/__nav-item/header__nav-item.css");
+@import url("./blocks/header/__nav-link/header__nav-link.css");
 
-.auth__header {
-  font-size: 24px;
-  line-height: 1.2;
-  font-weight: 900;
-  text-align: center;
-}
 
-/* .auth__form {
-  background-color: #444;
-} */
-
-.auth__input {
-  width: 100%;
-  padding: 5px 0 10px;
-  margin: 0;
-  border: 0;
-  border-bottom: 2px solid #ccc;
-  background-color: #000; /* transparent */
-  color: #ccc;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.2;
-}
-
-.auth__input:focus {
-  outline: none;
-}
-
-.auth__error {
-  color: #FF0000;
-  font-size: 12px;
-  line-height: 1;
-  padding: 4px 0 0;
-  min-height: 28px;
-  display: block;
-}
-
-.auth__button {
-  box-sizing: border-box;
-  width: 100%;
-  border: 1px solid #fff;
-  border-radius: 2px;
-  background-color: #fff;
-  color: #000;
-  margin: 180px 0 0;
-  padding: 15px 0;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 1.22;
-  text-align: center;
+/*
+Это пока не удаляю, хочу все же сделать бургер-меню для мобильной версии
+*/
+/*
+.header__close-button {
+  display: none;
+  width: 20px;
+  height: 20px;
+  background-image: url("./images/icon-close.svg");
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  background-position: center center;
   cursor: pointer;
+  border: 0;
+  padding: 0;
   transition: opacity 0.1s linear 0s;
 }
-
-.auth__button:hover {
-  opacity: 0.85;
-}
-
-.auth__reminder {
-  margin: 15px 0 0;
-  color: #fff;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.2;
-  width: 100%;
-  text-align: center;
-}
-
-.auth__caption{
-  margin: 0;
-  display: inline;
-}
-.auth__link {
-  color: #fff;
-  text-decoration: none;
-  opacity: 1;
-  transition: opacity 0.1s linear 0s;
-}
-.auth__link:hover {
+.header__close-button:hover {
   opacity: 0.6;
 }
 
-/********************************/
-
-.popup__container_info {
-  /* min-height: 330px; */
-}
-
-.info-tooltip {
+.header__menu-button {
+  display: none;
+  width: 20px;
+  height: 20px;
+  background-image: url("./images/icon-burg.svg");
+  background-color: transparent;
   background-repeat: no-repeat;
-  background-size: 120px 120px;
-  background-position: top center;
-  margin: 24px 0;
-  padding: 152px 0 0;
-  text-align: center;
-  font-weight: 900;
-  font-size: 24px;
-  line-height: 1.2;
+  background-size: 20px 20px;
+  background-position: center center;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  transition: opacity 0.1s linear 0s;
 }
-.info-tooltip__succeed {
-  background-image: url('./images/icon-succeed.svg');
-}
-.info-tooltip__fail {
-  background-image: url('./images/icon-fail.svg');
+.header__menu-button:hover {
+  opacity: 0.6;
 }
 
-
-/********************************/
+@media (max-width: 768px) {
+  .header__close-button {
+    display: block;
+  }
+  .header__menu-button {
+    display: block;
+  }
+}
+*/
