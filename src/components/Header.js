@@ -7,6 +7,9 @@ function Header({ onSignOut, isLoggedIn, userData }) {
 
       <Link to="/" className="header__link-logo"><div className="header__logo"></div></Link> {/* Убрать Link у логотипа? */}
 
+      {/* <button className="header__close-button" type="button" aria-label="Закрыть"></button> */}
+      {/* <button className="header__menu-button" type="button" aria-label="Меню"></button> */}
+
       <nav className="header__nav-container">
         <ul className="header__nav-list">
           <Routes>

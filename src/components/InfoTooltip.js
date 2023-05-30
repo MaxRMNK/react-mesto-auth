@@ -1,4 +1,9 @@
-function InfoTooltip({isInfoTooltipOpen, isSuccessAuth, onClose, onOverlay}) {
+function InfoTooltip({
+    isInfoTooltipOpen,
+    isSuccessAuth,
+    onClose,
+    onOverlay
+  }) {
 
   let message = isSuccessAuth ? 'Вы успешно зарегистрировались!' : 'Что-то пошло не так! Попробуйте ещё раз.';
 

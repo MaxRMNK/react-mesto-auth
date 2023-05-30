@@ -74,6 +74,7 @@ code {
 @import url("./blocks/auth/__input/auth__input.css");
 @import url("./blocks/auth/__error/auth__error.css");
 @import url("./blocks/auth/__button/auth__button.css");
+@import url("./blocks/auth/__button/_disabled/auth__button_disabled.css");
 @import url("./blocks/auth/__reminder/auth__reminder.css");
 @import url("./blocks/auth/__caption/auth__caption.css");
 @import url("./blocks/auth/__link/auth__link.css");
@@ -133,5 +134,5 @@ code {
   .header__menu-button {
     display: block;
   }
-}
-*/
+} */
+

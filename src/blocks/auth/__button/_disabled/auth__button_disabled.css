@@ -1,0 +1,9 @@
+.auth__button_disabled {
+  opacity: 0.6;
+  cursor: default;
+  pointer-events: none;
+}
+
+.auth__button_disabled:hover {
+  opacity: 0.6;
+}

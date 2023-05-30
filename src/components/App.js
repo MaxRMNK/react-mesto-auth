@@ -74,6 +74,7 @@ function App() {
 
   // Регистрация
   function handleRegister(value) {
+    setIsLoading(true);
     auth.register(value.email, value.password)
     .then((res) => {
       setSuccessAuth(true);
@@ -84,17 +85,29 @@ function App() {
       console.log(err); // выведем ошибку в консоль
     })
     .finally(() => {
+      setIsLoading(false);
       setInfoTooltipOpen(true);
     })
   }
 
   // Авторизация
   function handleLogin(value) {
+    setIsLoading(true);
     auth.login(value.email, value.password)
     .then((data) => {
       if(data.token) {
         localStorage.setItem('jwt', data.token);
-        checkAuth();
+        // checkAuth(); // было. 97 строка + коммент ниже + коммент
+        /**
+         * Здесь избыточно проверять авторизацию, так как вы только что получили токен
+         * и можете считать его в данный момент валидным в рамках сессии авторизации.
+         * Здесь вместо проверки токена следует установить значение переменной isLoggedIn
+         * как true - ваша форма после этого будет работать корректно.
+         * --
+         * Тупанул. Почему-то решил, что сделав проверку checkAuth() получу сразу true,
+         * а скрипт не успев получить ответ идет дальше
+         */
+        setLoggedIn(true); // стало
         navigate('/', { replace: true });
       }
     })
@@ -102,6 +115,9 @@ function App() {
       setSuccessAuth(false);
       setInfoTooltipOpen(true);
       console.log(err); // выведем ошибку в консоль
+    })
+    .finally(() => {
+      setIsLoading(false);
     })
   }
 
@@ -127,21 +143,30 @@ function App() {
       .then((result) => {
         setCurrentUser(result[0]); // apiUser
         setCards(result[1]); // apiCards
+        console.log(result[0]);
+      })
+      .then(() => {
+        console.log(currentUser);
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
       });
 
-      // Это нужно для того, чтобы при отправке данных формы "вход" переадресация осуществлялась корректно.
-      // Без этой строки, переадресация на страницу с карточками происходит только после повторной отправки формы.
-      // Как решить проблему по-другому не знаю.
-      navigate('/', { replace: true });
+      // // Это нужно для того, чтобы при отправке данных формы "вход" переадресация осуществлялась корректно.
+      // // Без этой строки, переадресация на страницу с карточками происходит только после повторной отправки формы.
+      // // Как решить проблему по-другому не знаю.
+      // navigate('/', { replace: true });
+      /**
+       * Это происходит из за того, что вы после авторизации не меняете значение переменной isLoggedIn,
+       * а вызываете проверку токена, которая по сути избыточна сразу после авторизации. См. комментарий на 97 строке.
+       */
     }
   }, [isLoggedIn]);
   // Второй аргумент - [] - массив зависимостей. Если значения прописанные в этом массиве изменились,
   // тогда этот эффект будет выполняться. Если нет - логика внутри useEffect вызываться не будет.
   // Если массив пустой - эффект выполняется только один раз при загрузке страницы.
   // Узнать: Можно ли в качестве зависимости указать функцию?
+
 
   // Эффект для закрытия popup кнопкой Esc
   React.useEffect(() => {
@@ -239,7 +264,6 @@ function App() {
 
   // Удаление после подтверждения
   function handleCardDeleteConfirm() {
-    // console.log('222');
     setIsLoading(true);
     api
       .deleteCard(cardDelete._id)
@@ -264,7 +288,6 @@ function App() {
   }
 
   function handleUpdateUser(userInfo) {
-    // console.log(userInfo);
     setIsLoading(true);
     api
       .setUserInfo(userInfo.name, userInfo.about)
@@ -332,20 +355,6 @@ function App() {
       />
 
       <Routes>
-        {/* <Route
-          path="*" // path="/"
-          element={
-            <Main
-              onEditAvatar={handleEditAvatarClick}
-              onEditProfile={handleEditProfileClick}
-              onAddPlace={handleAddPlaceClick}
-              cards={cards}
-              onCardClick={setSelectedCard}
-              onCardLike={handleCardLike}
-              onCardDelete={handleCardDelete}
-            />
-          }
-        /> */}
         <Route
           path="/"
           element={<ProtectedRouteElement
@@ -358,30 +367,18 @@ function App() {
             onCardClick={setSelectedCard}
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
-        />}
-        />
+          />} />
         <Route path="/sign-up" element={<Login
-          // formValue={valueLogin}
-          // setFormValue={setValueLogin}
           onLogin={handleLogin}
+          isLoading={isLoading}
           />} />
         <Route path="/sign-in" element={<Register
-          // formValue={valueRegister}
-          // setFormValue={setValueRegister}
           onRegister={handleRegister}
+          isLoading={isLoading}
           />} />
         <Route path="*" element={isLoggedIn ? <Navigate to="/" replace /> : <Navigate to="/sign-up" replace />} />
       </Routes>
 
-      {/* <Main
-        onEditAvatar={handleEditAvatarClick}
-        onEditProfile={handleEditProfileClick}
-        onAddPlace={handleAddPlaceClick}
-        cards={cards}
-        onCardClick={setSelectedCard}
-        onCardLike={handleCardLike}
-        onCardDelete={handleCardDelete}
-      /> */}
 
       <Routes>
         <Route path="/" element={ <Footer /> } />

@@ -9,9 +9,9 @@ function PopupWithForm({
     name,
     title,
     buttonText,
-    children,
     isLoading,
     onOverlay,
+    children,
   }) {
   // console.log('PopupWithForm', props);
 
