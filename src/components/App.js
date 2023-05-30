@@ -143,10 +143,6 @@ function App() {
       .then((result) => {
         setCurrentUser(result[0]); // apiUser
         setCards(result[1]); // apiCards
-        console.log(result[0]);
-      })
-      .then(() => {
-        console.log(currentUser);
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
