@@ -8,7 +8,12 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/react-mesto-auth">
+      {/*
+      Параметр `basename="/react-mesto-auth"` добавлен для того, чтобы на GitHub Pages приложение работало нормально.
+      GitHub Pages дает репозитариям бесплатные адреса, где проект находится в директории: "maxrmnk.github.io/react-mesto-auth/",
+      а без параметра "basename" Реакт Роутер считает домашней корневую директорию, в итоге все работает криво.
+      */}
       <App />
     </BrowserRouter>
   </React.StrictMode>

@@ -5,7 +5,7 @@ const Login = ({ onLogin, isLoading }) => {
 
   // Переписал. ПР.12 В.3. Здесь инпуты обрабатываются хуком useForm
   // В Register.js - по-старому, методом и стейтом в самом компоненте.
-  const {values, handleChange, setValues} = useForm({ email: '', password: '' })
+  const {values, handleChange } = useForm({ email: '', password: '' }) // { setValues }
 
   const handleSubmit = (evt) => {
     evt.preventDefault();

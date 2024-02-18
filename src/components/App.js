@@ -191,6 +191,7 @@ function App() {
     return () => {
       document.removeEventListener("keydown", closeOnEsc);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     isEditAvatarPopupOpen,
     isEditProfilePopupOpen,

@@ -15,6 +15,7 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser, isLoading, onOverlay})
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
   // В массиве зависимостей был "currentUser", но при закрытии popup без сохранения данные формы не сбрасывались
 
