@@ -8,6 +8,13 @@
 
 Целью данной проектной работы является изучение на практике возможностей регистрации и авторизации в приложении, переадресации пользователей на нужные страницы и создание приватных маршрутов.
 
+## Технологии
+ - HTML5 и CSS3
+ - Верстка кросбраузерная и адаптивная на основе flexbox и grid, с элементами анимации, реализована по методологии БЭМ
+ - JavaScript ES6
+ - Библиотека (фреймворк) JavaScript React 18
+ - Модуль React Router DOM
+
 ## Что сделано
   * Сверстаны дополнительные страницы (регистрации и авторизации), компоненты модального окна, дополнительные элементы "шапки" сайта (навигация и информация о пользователе). [Макет в Figma](https://www.figma.com/file/5H3gsn5lIGPwzBPby9jAOo/Sprint-14-RU?node-id=0%3A1)
   * Созданы роуты для регистрации и авторизации пользователей (sign-up и sign-in), настроена защита от неавторизованных пользователей и описаны перенаправления.
@@ -64,7 +71,7 @@
 (node:13820) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
 ```
 
-У меня пока не получилось разобраться как исправить их правильней. Решения есть здесь:
+У меня пока не получилось разобраться как исправить их правильней. Варианты решения есть здесь:
 * https://stackoverflow.com/questions/70469717/cant-load-a-react-app-after-starting-server
 * https://stackoverflow.com/questions/74915353/onaftersetupmiddleware-and-onbeforesetupmiddleware-warnings-in-react
 * https://discuss.codecademy.com/t/react-app-error/779264
